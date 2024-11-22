@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="dv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ޚަބަރު މަޒުމޫނު</title>
+    <link href="https://fonts.googleapis.com/css2?family=Faruma&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d10000;
+            --secondary-color: #2C3E50;
+            --background-color: #F7F9FC;
+            --card-background: #FFFFFF;
+            --text-color: #333333;
+        }
+        body {
+            font-family: 'Faruma', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            background-color: var(--card-background);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo {
+            height: 60px;
+        }
+        .article-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        .article-title {
+            font-size: 2em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .article-meta {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .article-source {
+            font-size: 0.9em;
+            color: var(--primary-color);
+            margin-left: 15px;
+        }
+        .article-date {
+            font-size: 0.9em;
+            color: #777;
+        }
+        .article-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+        .side-panel {
+            width: 100%;
+            padding: 25px;
+            background-color: var(--card-background);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            text-align: right;
+        }
+        .side-panel h2 {
+            color: var(--secondary-color);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            text-align: right;
+        }
+        .side-panel ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+            text-align: right;
+        }
+        .side-panel ul li {
+            margin-bottom: 12px;
+        }
+        .side-panel ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 5px;
+            justify-content: flex-end;
+        }
+        .side-panel ul li a:hover {
+            color: var(--primary-color);
+            background-color: rgba(209, 0, 0, 0.1);
+        }
+        .side-panel ul li a img {
+            width: 20px;
+            height: 20px;
+            margin-left: 12px;
+            margin-right: 0;
+        }
+        .main-content {
+            flex: 1;
+        }
+        .animated-banner {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .animated-banner-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-left 30s linear infinite;
+        }
+        .animated-banner-item {
+            display: inline-block;
+            margin-right: 50px;
+        }
+        .animated-banner-item img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .other-articles {
+            margin-top: 30px;
+        }
+        .other-article {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .other-article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .other-article h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+            color: var(--secondary-color);
+        }
+        .other-article h3 a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .other-article h3 a:hover {
+            color: var(--primary-color);
+        }
+        .other-article .source-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+        .other-article .source-info img {
+            width: 16px;
+            height: 16px;
+            margin-left: 8px;
+        }
+        .ad-space {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .ad-space p {
+            color: #777;
+            margin: 0;
+        }
+        .comments-section {
+            margin-top: 40px;
+            padding: 30px;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .comments-section h2 {
+            color: var(--secondary-color);
+            text-align: right;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 15px;
+            font-size: 1.5em;
+        }
+        .comment-form {
+            margin-bottom: 40px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-family: 'Faruma', sans-serif;
+            resize: vertical;
+            direction: rtl;
+            transition: border-color 0.3s ease;
+        }
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        .comment-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Faruma', sans-serif;
+            float: right;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .comment-form button:hover {
+            background-color: #b00000;
+            transform: translateY(-2px);
+        }
+        .comment {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            text-align: right;
+            transition: background-color 0.3s ease;
+        }
+        .comment:hover {
+            background-color: #f9f9f9;
+        }
+        .comment:last-child {
+            border-bottom: none;
+        }
+        .comment-author {
+            font-weight: bold;
+            color: var(--secondary-color);
+            font-size: 1.1em;
+        }
+        .comment-date {
+            font-size: 0.9em;
+            color: #777;
+            margin-right: 10px;
+        }
+        .comment-content {
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+        .side-panel-toggle {
+            display: none;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Faruma', sans-serif;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .side-panel {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 30px;
+                display: none;
+            }
+            .side-panel.active {
+                display: block;
+            }
+            .side-panel-toggle {
+                display: block;
+            }
+            .main-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="https://i.ibb.co/6yR36k1/Asset-2.png" alt="ޚަބަރު އެއްކުރާ ލޯގޯ" class="logo">
+    </nav>
+
+    <div class="animated-banner">
+        <div class="animated-banner-content" id="animatedBanner">
+            <!-- Banner content will be dynamically added here -->
+        </div>
+    </div>
+
+    <div class="container">
+        <button class="side-panel-toggle" onclick="toggleSidePanel()">ނޫސްތައް އަދި އެހެން ޚަބަރުތައް</button>
+        <div class="side-panel" id="sidePanel">
+            <h2>ނޫސްތައް</h2>
+            <ul>
+                <li><a href="#"><span>ބީބީސީ</span><img src="https://www.bbc.co.uk/favicon.ico" alt="ބީބީސީ"></a></li>
+                <li><a href="#"><span>ރޮއިޓަރސް</span><img src="https://www.reuters.com/favicon.ico" alt="ރޮއިޓަރސް"></a></li>
+                <li><a href="#"><span>ދަ ގާޑިއަން</span><img src="https://www.theguardian.com/favicon.ico" alt="ދަ ގާޑިއަން"></a></li>
+                <li><a href="#"><span>އެސޯސިއޭޓެޑް ޕްރެސް</span><img src="https://www.apnews.com/favicon.ico" alt="އެސޯސިއޭޓެޑް ޕްރެސް"></a></li>
+                <li><a href="#"><span>އަލްޖަޒީރާ</span><img src="https://www.aljazeera.com/favicon.ico" alt="އަލްޖަޒީރާ"></a></li>
+            </ul>
+            <h2>އެހެން ޚަބަރުތައް</h2>
+            <div id="otherArticles" class="other-articles">
+                <!-- Other articles will be dynamically added here -->
+            </div>
+        </div>
+        <div class="main-content">
+            <img id="articleImage" class="article-image" src="" alt="މަޒުމޫނުގެ ފޮޓޯ">
+            <h1 id="articleTitle" class="article-title"></h1>
+            <div class="article-meta">
+                <span id="articleDate" class="article-date"></span>
+                <span id="articleSource" class="article-source"></span>
+            </div>
+            <div id="articleContent" class="article-content"></div>
+            <div class="comments-section">
+                <h2>ޚިޔާލު</h2>
+                <div class="comment-form">
+                    <input type="text" id="commentName" placeholder="ނަން" required>
+                    <textarea id="commentText" placeholder="ތިޔަބޭފުޅާގެ ޚިޔާލު މިތަނުގައި ލިޔުއްވާ..." rows="4" required></textarea>
+                    <button type="button" onclick="postComment()">ޚިޔާލު ފޮނުވާ</button>
+                </div>
+                <div id="comments">
+                    <!-- Comments will be dynamically added here -->
+                </div>
+            </div>
+            <div class="ad-space">
+                <p>އިޝްތިހާރު ޖާގަ</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ދިވެހިނޫސް. ހުރިހާ ޙައްޤެއް ރައްކާތެރިކުރެވިފައި.</p>
+    </footer>
+
+    <script>
+        async function fetchArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const articleUrl = urlParams.get('url');
+
+            if (!articleUrl) {
+                document.body.innerHTML = '<h1>މަޒުމޫނު ނުފެނުނު</h1>';
+                return;
+            }
+
+            try {
+                const corsProxy = 'https://api.allorigins.win/raw?url=';
+                const response = await fetch(corsProxy + encodeURIComponent(articleUrl));
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+
+                const title = doc.querySelector('title')?.textContent || 'މަޒުމޫނުގެ ސުރުޚީ';
+                const content = doc.querySelector('article') || doc.body;
+                const imageUrl = doc.querySelector('meta[property="og:image"]')?.content || '';
+                const source = new URL(articleUrl).hostname;
+                const date = new Date().toLocaleDateString('dv-MV');
+
+                document.getElementById('articleTitle').textContent = await translateToDhivehi(title);
+                document.getElementById('articleImage').src = imageUrl;
+                document.getElementById('articleSource').textContent = await translateToDhivehi(source);
+                document.getElementById('articleDate').textContent = date;
+
+                const translatedContent = await translateToDhivehi(content.textContent);
+                document.getElementById('articleContent').innerHTML = translatedContent;
+
+                // Fetch featured news for the banner
+                await fetchFeaturedNews();
+
+                // Fetch other articles
+                await fetchOtherArticles();
+            } catch (error) {
+                console.error('Error fetching article:', error);
+                document.body.innerHTML = '<h1>މަޒުމޫނު ލޯޑްކުރުމުގައި މައްސަލައެއް ދިމާވެއްޖެ</h1>';
+            }
+        }
+
+        async function translateToDhivehi(text) {
+            const apiUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=dv&dt=t&q=${encodeURIComponent(text)}`;
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                return data[0].map(sentence => sentence[0]).join(' ').replace(/[a-zA-Z]/g, '').replace(/[^\u0780-\u07B1\s]/g, '');
+            } catch (error) {
+                console.error('Translation error:', error);
+                return text.replace(/[a-zA-Z]/g, '').replace(/[^\u0780-\u07B1\s]/g, '');
+            }
+        }
+
+        async function fetchFeaturedNews() {
+            const newsFeeds = [
+                'https://feeds.bbci.co.uk/news/world/rss.xml',
+                'https://www.reuters.com/rssfeed/world/',
+                'https://www.theguardian.com/world/rss',
+                'https://apnews.com/hub/world-news/feed',
+                'https://www.aljazeera.com/xml/rss/all.xml'
+            ];
+
+            const sourceLogos = {
+                'feeds.bbci.co.uk': 'https://www.bbc.co.uk/favicon.ico',
+                'www.reuters.com': 'https://www.reuters.com/favicon.ico',
+                'www.theguardian.com': 'https://www.theguardian.com/favicon.ico',
+                'apnews.com': 'https://www.apnews.com/favicon.ico',
+                'www.aljazeera.com': 'https://www.aljazeera.com/favicon.ico'
+            };
+
+            const animatedBanner = document.getElementById('animatedBanner');
+            const corsProxy = 'https://api.allorigins.win/raw?url=';
+
+            for (const feed of newsFeeds) {
+                try {
+                    const response = await fetch(corsProxy + encodeURIComponent(feed));
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.text();
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(data, 'text/xml');
+                    const items = xml.querySelectorAll('item');
+
+                    for (let i = 0; i < 3 && i < items.length; i++) {
+                        const title = items[i].querySelector('title')?.textContent || '';
+                        const source = new URL(feed).hostname;
+                        const translatedTitle = await translateToDhivehi(title);
+                        const translatedSource = await translateToDhivehi(source);
+                        
+                        const bannerItem = document.createElement('span');
+                        bannerItem.className = 'animated-banner-item';
+                        bannerItem.innerHTML = `
+                            <img src="${sourceLogos[source]}" alt="${translatedSource} ލޯގޯ">
+                            ${translatedTitle}
+                        `;
+                        animatedBanner.appendChild(bannerItem);
+                    }
+                } catch (error) {
+                    console.error(`Error fetching news from ${feed}:`, error);
+                }
+            }
+        }
+
+        async function fetchOtherArticles() {
+            const otherArticlesContainer = document.getElementById('otherArticles');
+            const corsProxy = 'https://api.allorigins.win/raw?url=';
+            const newsFeeds = [
+                'https://feeds.bbci.co.uk/news/world/rss.xml',
+                'https://www.reuters.com/rssfeed/world/',
+                'https://www.theguardian.com/world/rss',
+                'https://apnews.com/hub/world-news/feed',
+                'https://www.aljazeera.com/xml/rss/all.xml'
+            ];
+
+            const sourceLogos = {
+                'feeds.bbci.co.uk': 'https://www.bbc.co.uk/favicon.ico',
+                'www.reuters.com': 'https://www.reuters.com/favicon.ico',
+                'www.theguardian.com': 'https://www.theguardian.com/favicon.ico',
+                'apnews.com': 'https://www.apnews.com/favicon.ico',
+                'www.aljazeera.com': 'https://www.aljazeera.com/favicon.ico'
+            };
+
+            for (const feed of newsFeeds) {
+                try {
+                    const response = await fetch(corsProxy + encodeURIComponent(feed));
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.text();
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(data, 'text/xml');
+                    const items = xml.querySelectorAll('item');
+
+                    for (let i = 0; i < 3 && i < items.length; i++) {
+                        const title = items[i].querySelector('title')?.textContent || '';
+                        const link = items[i].querySelector('link')?.textContent || '';
+                        const source = new URL(feed).hostname;
+
+                        const translatedTitle = await translateToDhivehi(title);
+
+                        const articleElement = document.createElement('div');
+                        articleElement.className = 'other-article';
+                        articleElement.innerHTML = `
+                            <h3><a href="?url=${encodeURIComponent(link)}">${translatedTitle}</a></h3>
+                            <div class="source-info">
+                                <img src="${sourceLogos[source]}" alt="ލޯގޯ">
+                            </div>
+                        `;
+                        otherArticlesContainer.appendChild(articleElement);
+                    }
+                } catch (error) {
+                    console.error(`Error fetching other articles from ${feed}:`, error);
+                }
+            }
+        }
+
+        function postComment() {
+            const name = document.getElementById('commentName').value;
+            const text = document.getElementById('commentText').value;
+            
+            if (name && text) {
+                const commentsContainer = document.getElementById('comments');
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                commentElement.innerHTML = `
+                    <span class="comment-author">${name}</span>
+                    <span class="comment-date">${new Date().toLocaleDateString('dv-MV')}</span>
+                    <div class="comment-content">${text}</div>
+                `;
+                commentsContainer.appendChild(commentElement);
+
+                // Clear the form
+                document.getElementById('commentName').value = '';
+                document.getElementById('commentText').value = '';
+            } else {
+                alert('ނަމާއި ޚިޔާލު ލިޔުއްވުމަށް');
+            }
+        }
+
+        window.addEventListener('load', fetchArticle);
+    </script>
+</body>
+</html>
